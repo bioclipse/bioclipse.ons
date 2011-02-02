@@ -7,4 +7,4 @@ Bundle-Vendor: Egon Willighagen
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Export-Package: ons.solubility.data
-Require-Bundle: com.google.data;bundle-version="0.0.1"
+Require-Bundle: net.bioclipse.google

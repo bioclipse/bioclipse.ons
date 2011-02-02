@@ -8,11 +8,13 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  net.bioclipse.core,
  net.bioclipse.scripting,
- org.eclipse.core.resources,
- com.google.data,
- com.google.commons
+ org.eclipse.core.resources
 Bundle-ActivationPolicy: lazy
 Export-Package: net.bioclipse.google.business
 Bundle-Vendor: The Bioclipse Team
-Bundle-ClassPath: .
+Bundle-ClassPath: jar/gdata-client-1.0.jar,
+ jar/gdata-core-1.0.jar,
+ jar/gdata-spreadsheet-3.0.jar,
+ jar/google-collect-1.0-rc2.jar,
+ .
 Import-Package: org.apache.log4j
