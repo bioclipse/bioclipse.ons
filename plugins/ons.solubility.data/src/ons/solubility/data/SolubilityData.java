@@ -20,98 +20,41 @@
  */
 package ons.solubility.data;
 
-import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import com.google.gdata.client.spreadsheet.SpreadsheetService;
-import com.google.gdata.client.spreadsheet.WorksheetQuery;
-import com.google.gdata.data.spreadsheet.Cell;
-import com.google.gdata.data.spreadsheet.CellEntry;
-import com.google.gdata.data.spreadsheet.CellFeed;
-import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
-import com.google.gdata.data.spreadsheet.SpreadsheetFeed;
-import com.google.gdata.data.spreadsheet.WorksheetEntry;
-import com.google.gdata.data.spreadsheet.WorksheetFeed;
+import net.bioclipse.core.domain.StringMatrix;
+import net.bioclipse.google.business.GoogleManager;
 
 public class SolubilityData {
 
-    private SpreadsheetService service;
+    GoogleManager google = new GoogleManager();
     
     private Map<Integer,Measurement> measurements;
     
     public SolubilityData(String username, String password) throws Exception {
         if(username==null) throw new NullPointerException("undefined username");
     	if(password==null) throw new NullPointerException("undefined password");
-    	this.service = new SpreadsheetService("ons-solubility-javaclient");
-    	this.service.setUserCredentials(username, password);
+    	google.setUserCredentials(username, password);
     	this.measurements = new HashMap<Integer,Measurement>();
     }
     
     public void download() throws Exception {
-        URL metafeedUrl = new URL(
-            "http://spreadsheets.google.com/feeds/spreadsheets/private/full"
-        );
-        SpreadsheetFeed feed = service.getFeed(metafeedUrl, SpreadsheetFeed.class);
-        List<SpreadsheetEntry> spreadsheets = feed.getEntries();
-
-        SpreadsheetEntry spreadsheet = null;
-        for (int i = 0; i < spreadsheets.size(); i++) {
-            SpreadsheetEntry entry = spreadsheets.get(i);
-            if ("SolubilitiesSum".equals(entry.getTitle().getPlainText())) {
-                spreadsheet = entry;
-            }
-        }
-
-        if (spreadsheet == null) {
-            throw new Exception("No spreadsheets with the name: SolubilitiesSum");
-        }
-        
-        WorksheetQuery worksheetQuery
-        = new WorksheetQuery(spreadsheet.getWorksheetFeedUrl());
-
-        worksheetQuery.setTitleQuery("Sheet1");
-        WorksheetFeed worksheetFeed = service.query(worksheetQuery,
-                                                    WorksheetFeed.class);
-        List<WorksheetEntry> worksheets = worksheetFeed.getEntries();
-        if (worksheets.isEmpty()) {
-            throw new Exception("No worksheets with that name in spreadhsheet "
-                                + spreadsheet.getTitle().getPlainText());
-        }
-
-        WorksheetEntry worksheet = worksheets.get(0);
-        
-        CellFeed cellFeed = service.getFeed(worksheet.getCellFeedUrl(), 
-                                            CellFeed.class);
-
-        List<CellEntry> cells = cellFeed.getEntries();
+    	StringMatrix matrix = google.loadWorksheet("SolubilitiesSum", "Sheet1");
         Measurement measurement = null;
-        int lastRow = 0;
-        for (CellEntry cellEntry : cells) {
-            Cell cell = cellEntry.getCell();
-            int row = cell.getRow();
-            if (row != lastRow) {
-                // new row :)
-                if (measurement != null && measurement.getReference() != null)
-                    measurements.put(row, measurement);
-                lastRow = row;
-                measurement = new Measurement();
-            }
-            if (row > 1) {
-                switch (cell.getCol()) {
-                    case 1: measurement.setExperiment(cell.getValue()); break;
-                    case 2: measurement.setSample(cell.getValue()); break;
-                    case 3: measurement.setReference(cell.getValue()); break;
-                    case 4: measurement.setSolute(cell.getValue()); break;
-                    case 5: measurement.setSoluteSMILES(cell.getValue()); break;
-                    case 6: measurement.setSolvent(cell.getValue()); break;
-                    case 7: measurement.setSolventSMILES(cell.getValue()); break;
-                    case 8: measurement.setConcentration(cell.getValue()); break;
-                    default: break;
-                }
-            }
+        // the first row has columns headers
+        for (int row=2; row<matrix.getRowCount(); row++) {
+        	measurement = new Measurement();
+            measurement.setExperiment(matrix.get(row, 1));
+            measurement.setSample(matrix.get(row, 2));
+            measurement.setReference(matrix.get(row, 3));
+            measurement.setSolute(matrix.get(row, 4));
+            measurement.setSoluteSMILES(matrix.get(row, 5));
+            measurement.setSolvent(matrix.get(row, 6));
+            measurement.setSolventSMILES(matrix.get(row, 7));
+            measurement.setConcentration(matrix.get(row, 8));
+            measurements.put(row-1, measurement);
         }
     }
     

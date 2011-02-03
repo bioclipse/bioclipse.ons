@@ -10,10 +10,31 @@
  ******************************************************************************/
 package net.bioclipse.google.business;
 
+import java.util.List;
+
 import net.bioclipse.core.PublishedClass;
+import net.bioclipse.core.PublishedMethod;
+import net.bioclipse.core.business.BioclipseException;
+import net.bioclipse.core.domain.StringMatrix;
 import net.bioclipse.managers.business.IBioclipseManager;
 
 @PublishedClass ("Manager for accessing the Google online services.")
 public interface IGoogleManager extends IBioclipseManager {
 
+    @PublishedMethod(
+        params="String username, String password",
+        methodSummary="Sets the Google user name and password."
+    )
+    public void setUserCredentials(String username, String password);
+
+    @PublishedMethod(
+        methodSummary="Lists the spreadsheets."
+    )
+    public List<String> listSpreadsheets() throws BioclipseException;
+
+    @PublishedMethod(
+        methodSummary="Downloads a worksheet from a spreadsheet.",
+        params="String spreadsheet, String worksheet"
+    )
+    public StringMatrix loadWorksheet(String spreadsheet, String worksheet);
 }
