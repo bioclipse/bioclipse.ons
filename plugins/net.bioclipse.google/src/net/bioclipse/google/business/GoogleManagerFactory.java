@@ -19,15 +19,19 @@ import org.eclipse.core.runtime.IExecutableExtensionFactory;
 public class GoogleManagerFactory implements IExecutableExtension, 
                                               IExecutableExtensionFactory {
 
-    private Object solubilityManager;
+    private Object googleManager;
     
     public void setInitializationData(IConfigurationElement config,
                                       String propertyName, 
                                       Object data) throws CoreException {
-        solubilityManager = Activator.getDefault().getJavaScriptManager();
+        googleManager = Activator.getDefault().getJavaScriptManager();
+        
+        if (googleManager == null ) {
+            throw new IllegalStateException("Could not get the JS Google manager");
+        }
     }
     
     public Object create() throws CoreException {
-        return solubilityManager;
+        return googleManager;
     }
 }
