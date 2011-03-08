@@ -100,21 +100,21 @@ public class GoogleManager implements IBioclipseManager {
     	SpreadsheetEntry sheet = null;
     	for (int i = 0; i < spreadsheets.size(); i++) {
     		SpreadsheetEntry entry = spreadsheets.get(i);
-    		if ("SolubilitiesSum".equals(entry.getTitle().getPlainText())) {
+    		if (spreadsheet.equals(entry.getTitle().getPlainText())) {
     			sheet = entry;
     		}
     	}
 
     	if (spreadsheet == null) {
     		throw new BioclipseException(
-    			"No spreadsheets with the name: SolubilitiesSum"
+    			"No spreadsheets with the name: " + spreadsheet
     		);
     	}
 
     	WorksheetQuery worksheetQuery =
     	    new WorksheetQuery(sheet.getWorksheetFeedUrl());
 
-    	worksheetQuery.setTitleQuery("Sheet1");
+    	worksheetQuery.setTitleQuery(worksheet);
     	SpreadsheetService service = getService();
     	WorksheetFeed worksheetFeed;
 		try {
