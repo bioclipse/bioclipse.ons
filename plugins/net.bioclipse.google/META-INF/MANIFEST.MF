@@ -53,6 +53,6 @@ Bundle-Vendor: The Bioclipse Team
 Bundle-ClassPath: .,
  jar/gdata-client-1.0.jar,
  jar/gdata-core-1.0.jar,
- jar/gdata-spreadsheet-3.0.jar.
+ jar/gdata-spreadsheet-3.0.jar
 Import-Package: org.apache.log4j
  
