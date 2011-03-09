@@ -37,4 +37,12 @@ public interface IGoogleManager extends IBioclipseManager {
         params="String spreadsheet, String worksheet"
     )
     public StringMatrix loadWorksheet(String spreadsheet, String worksheet);
+
+    @PublishedMethod(
+        methodSummary="Downloads a worksheet from a spreadsheet.",
+        params="String spreadsheet, String worksheet, " +
+        		"boolean firstRowHasHeaders"
+    )
+    public StringMatrix loadWorksheet(String spreadsheet, String worksheet,
+    	boolean firstRowHasHeaders);
 }

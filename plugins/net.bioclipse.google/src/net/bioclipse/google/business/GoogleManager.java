@@ -95,6 +95,12 @@ public class GoogleManager implements IBioclipseManager {
     
     public StringMatrix loadWorksheet(String spreadsheet, String worksheet)
     throws BioclipseException {
+    	return loadWorksheet(spreadsheet, worksheet, false);
+    }
+
+    public StringMatrix loadWorksheet(String spreadsheet, String worksheet,
+    	boolean firstRowHasHeaders)
+    throws BioclipseException {
     	List<SpreadsheetEntry> spreadsheets = getSpreadsheets();
 
     	SpreadsheetEntry sheet = null;
@@ -155,7 +161,11 @@ public class GoogleManager implements IBioclipseManager {
     	StringMatrix matrix = new StringMatrix();
     	for (CellEntry cellEntry : cells) {
     		Cell cell = cellEntry.getCell();
-    		matrix.set(cell.getRow(), cell.getCol(), cell.getValue());
+    		if (firstRowHasHeaders && cell.getRow() == 1) {
+    			matrix.setColumnName(cell.getCol(), cell.getValue());
+    		} else {
+    			matrix.set(cell.getRow(), cell.getCol(), cell.getValue());
+    		}
     	}
     	return matrix;
     }
