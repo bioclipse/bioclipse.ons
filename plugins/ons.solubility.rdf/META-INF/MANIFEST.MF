@@ -5,12 +5,7 @@ Bundle-SymbolicName: ons.solubility.rdf;singleton:=true
 Bundle-Version: 0.0.1
 Bundle-Vendor: Egon Willighagen
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: jar/commons-logging-1.1.1.jar,
- jar/icu4j_3_4.jar,
- jar/iri.jar,
- jar/jena.jar,
- jar/xercesImpl.jar,
- .
+Bundle-ClassPath: .
 Export-Package: ons.solubility.rdf
 Require-Bundle: ons.solubility.data;bundle-version="0.0.1",
  org.openscience.cdk.core,
@@ -18,5 +13,6 @@ Require-Bundle: ons.solubility.data;bundle-version="0.0.1",
  org.openscience.cdk.smiles,
  org.openscience.cdk.standard,
  org.openscience.cdk.nonotify,
- org.openscience.cdk.inchi
+ org.openscience.cdk.inchi,
+ com.hp.hpl.jena;bundle-version="2.6.2"
 Import-Package: net.sf.jniinchi
