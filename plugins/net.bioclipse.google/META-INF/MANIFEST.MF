@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Google plugin
 Bundle-SymbolicName: net.bioclipse.google;singleton:=true
-Bundle-Version: 2.5.0.20110208
+Bundle-Version: 2.5.0.qualifier
 Bundle-Activator: net.bioclipse.google.business.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,

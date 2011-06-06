@@ -2,7 +2,7 @@
 <feature
       id="net.bioclipse.google_feature"
       label="Google Feature"
-      version="2.5.0.20110208"
+      version="2.5.0.qualifier"
       provider-name="The Bioclipse Team"
       plugin="net.bioclipse.google">
 
