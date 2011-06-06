@@ -169,4 +169,40 @@ public class GoogleManager implements IBioclipseManager {
     	}
     	return matrix;
     }
+
+    public List<String> listWorksheets(String spreadsheet)
+        throws BioclipseException {
+        List<SpreadsheetEntry> spreadsheets = getSpreadsheets();
+
+        SpreadsheetEntry sheet = null;
+        for (int i = 0; i < spreadsheets.size(); i++) {
+        	SpreadsheetEntry entry = spreadsheets.get(i);
+        	if (spreadsheet.equals(entry.getTitle().getPlainText())) {
+        		sheet = entry;
+        	}
+        }
+
+        if (spreadsheet == null) {
+        	throw new BioclipseException(
+        		"No spreadsheets with the name: " + spreadsheet
+        	);
+        }
+
+        List<String> worksheetNames = new ArrayList<String>();
+
+        List<WorksheetEntry> worksheets;
+		try {
+			worksheets = sheet.getWorksheets();
+		} catch (Exception exception) {
+			throw new BioclipseException(
+	            "Error while getting worksheets for: " + spreadsheet,
+	            exception
+	        );
+		}
+        for (WorksheetEntry worksheet : worksheets) {
+        	worksheetNames.add(worksheet.getTitle().getPlainText());
+        }
+
+        return worksheetNames;
+    }
 }

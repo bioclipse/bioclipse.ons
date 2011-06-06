@@ -33,6 +33,12 @@ public interface IGoogleManager extends IBioclipseManager {
     public List<String> listSpreadsheets() throws BioclipseException;
 
     @PublishedMethod(
+        methodSummary="Lists the worksheets for the given spreadsheet.",
+        params="String spreadsheet"
+    )
+    public List<String> listWorksheets(String spreadsheet);
+
+    @PublishedMethod(
         methodSummary="Downloads a worksheet from a spreadsheet.",
         params="String spreadsheet, String worksheet"
     )
