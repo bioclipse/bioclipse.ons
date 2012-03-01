@@ -6,6 +6,10 @@
       provider-name="The Bioclipse Team"
       plugin="net.bioclipse.google">
 
+   <description>
+      Functionality to download data from online Google spreadsheets.
+   </description>
+
    <copyright>
       Copyright (c) 2011 The Bioclipse Project Team and others.
 All rights reserved.
