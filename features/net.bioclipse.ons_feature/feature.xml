@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="net.bioclipse.ons_feature"
-      label="Open Notebook Sciene Feature"
+      label="Open Notebook Science Feature"
       version="2.1.0.v20090807"
       provider-name="The Bioclipse Team"
       plugin="net.bioclipse.ons">
+
+   <description>
+      Feature with plugins for the Open Notebook Science solubility project.
+   </description>
 
    <copyright>
       Copyright (c) 2009 The Bioclipse Project Team and others.
