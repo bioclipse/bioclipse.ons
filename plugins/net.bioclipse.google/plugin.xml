@@ -18,5 +18,22 @@
    <extension point="org.eclipse.core.runtime.preferences">
       <initializer class="net.bioclipse.google.preferences.PreferenceInitializer"/>
    </extension>
+   <extension
+         point="net.bioclipse.usermanager.accountType">
+      <AccountType
+            logoPath="Icons/googleIcon.gif"
+            name="Google Account">
+         <property
+               name="Username"
+               required="true"
+               secret="false">
+         </property>
+         <property
+               name="Password"
+               required="true"
+               secret="true">
+         </property>
+      </AccountType>
+   </extension>
 
 </plugin>
