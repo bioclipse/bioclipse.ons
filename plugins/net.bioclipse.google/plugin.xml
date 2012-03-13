@@ -21,7 +21,6 @@
    <extension
          point="net.bioclipse.usermanager.accountType">
       <AccountType
-            logoPath="Icons/googleIcon.gif"
             name="Google Account">
          <property
                name="Username"
