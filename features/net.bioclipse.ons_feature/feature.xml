@@ -4,7 +4,7 @@
       label="Open Notebook Science Feature"
       version="2.1.0.v20090807"
       provider-name="The Bioclipse Team"
-      plugin="net.bioclipse.ons">
+      plugin="net.bioclipse.onssolubility">
 
    <description>
       Feature with plugins for the Open Notebook Science solubility project.
