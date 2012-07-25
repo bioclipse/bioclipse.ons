@@ -48,6 +48,8 @@ public class GooglePreferencePage extends FieldEditorPreferencePage
             "Google Password",
             getFieldEditorParent()
         );
+        googlePassword.getTextControl( getFieldEditorParent() )
+        .setEchoChar( '\u25CF' );
         addField(googlePassword);
 	}
 
